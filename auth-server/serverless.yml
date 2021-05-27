@@ -23,7 +23,8 @@ frameworkVersion: '2'
 provider:
   name: aws
   runtime: nodejs12.x
-  lambdaHashingVersion: 20201221
+  lambdaHashingVersion: eu-central-1
+  timeout: 60
 
 # you can overwrite defaults here
 #  stage: dev
