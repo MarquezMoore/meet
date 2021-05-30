@@ -33,7 +33,7 @@ module.exports.getAuthURL = async () => {
   });
 
   return {
-    statusCoe: 200,
+    statusCode: 200,
     headers: {
       "Access-Control-Allow-Origin": "*",
     },
@@ -46,35 +46,94 @@ module.exports.getAuthURL = async () => {
 module.exports.getAccessToken = async event => {
   // Instance of the Oauth Client most be instantiated
   // How is a oAuthClient instaintiated - dont really understand
-  const oAuthClient = new OAuth2(
+  const oAuth2Client = new OAuth2(
     client_id,
     client_secret,
     redirect_uris[0]
   );
 
   // Decode the URL parameter from the URL
-  // Read more https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent
-  const code = decodeURIComponent(`${event.pathParametes.code}`);
+  const code = decodeURIComponent(`${event.pathParameters.code}`);
 
-  // Return Promise ?
+ 
   return new Promise( (resolve, reject) => {
-    oAuthClient.getToken(code, (err, token) => {
+    oAuth2Client.getToken(code, (err, token) => {
       return err 
-      ? reject(err)
-      : resolve(token)
+        ? reject(err)
+        : resolve(token)
     });
   })
     .then( token => {
       // Send token in response body
       return {
         statusCode: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
         body: JSON.stringify(token),
       }
     })
     .catch( err => {
       return {
         statusCode: 500,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
         body: JSON.stringify(err),
       }
     })
-}
+}; 
+// End of getAccessToken function
+
+// getCalendarEvents Function
+module.exports.getCalendarEvents = async event => {
+  // Step 1: Create new OAuth2 client
+  const oAuth2Client = new OAuth2(
+    client_id,
+    client_secret,
+    redirect_uris[0]
+  );
+  // Step 2: Obtain the access_Token 
+  const accessToken = decodeURIComponent(`${event.pathParameters.accessToken}`);
+
+  return new Promise( (resolve, reject) => {
+
+    oAuth2Client.setCredentials({accessToken});
+
+    calendar.events.list(
+      {
+        calendarId: credentials.calendar_id,
+        auth: oAuth2Client,
+        timeMin: new Date().toISOString(),
+        singleEvents: true,
+        orderBy: "startTime",
+      },
+      (err, response) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(response);
+        }
+      }
+    );
+  })
+  .then( results => {
+    return {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({ events: results.data.items }),
+    }
+  })
+  .catch( err => {
+    return {
+      statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(err),
+    }
+  })
+};
+// End of getCalendarEvents function

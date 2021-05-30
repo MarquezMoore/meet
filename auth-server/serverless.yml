@@ -13,15 +13,21 @@ provider:
     CALENDAR_ID: ${file(config.json):CALENDAR_ID}
   
 functions:
-  getAuthURL:
+  getAuthURL: #This function will build the authorization url with the provided information and return it
     handler: handler.getAuthURL
     events:
       - http:
           path: api/get-auth-url
           method: get
-  getAccessToken:
+  getAccessToken: # this function will extract the access_token sent by the authorization server after authorization
     handler: handler.getAccessToken
     events: 
       - http:
           path: api/token/{code}
           method: get
+  getCalendarEvents: # this function will take the access_token and request all events available - get
+    handler: handler.getCalendarEvents
+    events:
+      - http:
+          path: api/get-events/{access_token}
+          method: get 
