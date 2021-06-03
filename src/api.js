@@ -1,6 +1,6 @@
 export const numOfEvents = events => {
   return events.length();
- }
+}
 
 export const extractLocations = events => {
  let extractLocations = events.map( e => e.location);

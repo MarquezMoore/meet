@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import Event from '../components/event/event'
 
@@ -20,17 +20,20 @@ describe('<Event /> Component', () => {
   });
 
   it('should contain show details button', () => {
-    expect(event.find('.show-details')).toHaveLength(1);
+    expect(event.find('.show-details')).toBeTruthy();
   });
 
   it('should show details closed per default', () => {
-    expect(details.prop('hidden')).toBe('');
+    expect(details.prop('hidden')).toEqual(null);
   });
+
 /*
   Post User Interactions
 */ 
   it('should show details when user clicks show-details button', () => {
+    console.log(details.props());
     showDetails.simulate('click');
-    expect(details.prop('hidden')).toBe('hidden');
+    console.log(details.props());
+    expect(EventWrapper.state('detailStatus')).toEqual('hidden');
   });
 });

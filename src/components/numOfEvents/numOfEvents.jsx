@@ -1,9 +1,11 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
 const NumOfEvents = () => {
   return (
     <div className="container">
-      <input className="numOfEvents" ></input>
+      <input type="text" className="numOfEvents" ></input>
+      <Button />
     </div>
   )
 }
