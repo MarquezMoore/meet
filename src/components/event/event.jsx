@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
 
 class Event extends React.Component {
   constructor(props) {
@@ -12,7 +11,6 @@ class Event extends React.Component {
   }
 
   toggleDetails() {
-    console.log('Click Triggered')
     this.state.detailStatus
       ? this.setState({
         detailStatus: null
@@ -23,11 +21,16 @@ class Event extends React.Component {
   }
 
   render() {
-
-    return (
+    const { event } = this.props;
+    return ( 
       <div className="event">
-        <Button onClick={this.toggleDetails} className="show-details"/>
-        <div hidden={this.state.detailStatus} className="details"></div>
+        <div className="event-overview">
+          {/* <h1>{event.summary}</h1> */}
+        </div>
+        <button onClick={this.toggleDetails} className="show-details"/>Show Details<button />
+        <div hidden={this.state.detailStatus} className="details">
+          {/* {event.description} */}
+        </div>
       </div>
     );
   };

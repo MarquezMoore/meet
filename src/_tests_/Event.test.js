@@ -31,9 +31,7 @@ describe('<Event /> Component', () => {
   Post User Interactions
 */ 
   it('should show details when user clicks show-details button', () => {
-    console.log(details.props());
     showDetails.simulate('click');
-    console.log(details.props());
     expect(EventWrapper.state('detailStatus')).toEqual('hidden');
   });
 });

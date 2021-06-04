@@ -1,3 +1,4 @@
+import mockData from './mock-data'
 export const numOfEvents = events => {
   return events.length();
 }
@@ -7,4 +8,8 @@ export const extractLocations = events => {
  var locations = [...new Set(extractLocations)];
  return locations;
 }
+
+export const getEvents = async () => {
+  return mockData;
+};
 

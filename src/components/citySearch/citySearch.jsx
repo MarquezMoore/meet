@@ -6,7 +6,8 @@ class CitySearch extends React.Component{
 
     this.state = {
       query: '',
-      suggestions: []
+      suggestions: [],
+      showSuggestions: undefined
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -15,8 +16,11 @@ class CitySearch extends React.Component{
 
   handleClick(suggestion) {
     this.setState({
-      query: suggestion
+      query: suggestion,
+      showSuggestions: false
     })
+
+    this.props.updateEvents(suggestion);
   }
 
   handleChange(e) {
@@ -37,12 +41,13 @@ class CitySearch extends React.Component{
         className="city-search" 
         type="text"
         value={this.state.query}
-        onChange={this.handleChange}/>
-      <ul className="suggestions">
+        onChange={this.handleChange}
+        onFocus={() => { this.setState({ showSuggestions: true }) }}/>
+      <ul className="suggestions" style={this.state.showSuggestions ? {} : { display: 'none' }} >
         {this.state.suggestions.map( s => (
           <li onClick={() => this.handleClick(s)} key={s} >{s}</li>
         ))}
-        <li key='all'>
+        <li key='all' onClick={() => this.handleClick("all")}>
           <b>See all cities</b>
         </li>
       </ul>
