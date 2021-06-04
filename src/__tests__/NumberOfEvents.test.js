@@ -5,12 +5,11 @@ import NumOfEvents from '../components/numOfEvents/numOfEvents';
 import { numOfEvents } from '../api';
 
 describe('<NumOfEvents /> component', () => {
-  let Wrapper, input, button;
+  let NumOfEventsWrapper, input;
 
   beforeAll(() => {
-    Wrapper = shallow(<NumOfEvents numOfEvents={numOfEvents} />)
-    input = Wrapper.find('input');
-    button = Wrapper.find('Button');
+    NumOfEventsWrapper = shallow(<NumOfEvents numOfEvents={numOfEvents} />)
+    input = NumOfEventsWrapper.find('input');
   });
 /*
   Pre User Interaction
@@ -23,9 +22,10 @@ describe('<NumOfEvents /> component', () => {
     expect(input.find({type: 'text'})).toHaveLength(1);
   });
 
-  it('sould container button for user to submit num of events to view', () => {
-    expect(button).toHaveLength(1);
+  it('should contain onChange event handler', () => {
+    expect(input.prop('onChange')).toBeTruthy();
   });
+
 /*
   Post User Interaction
 */ 

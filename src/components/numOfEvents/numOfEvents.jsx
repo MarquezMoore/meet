@@ -1,13 +1,27 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
 
-const NumOfEvents = () => {
-  return (
-    <div className="container">
-      <input type="text" className="numOfEvents" ></input>
-      <Button />
-    </div>
-  )
+
+class NumOfEvents extends React.Component {
+  constructor(props) {
+    super();
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange = e => {
+    this.props.updateEvents( null, e.target.value);
+  }
+
+  render() {
+    return (
+      <div className="container">
+        <input 
+          type="text" 
+          className="numOfEvents"
+          onChange={this.handleChange}
+        ></input>
+      </div>
+    );
+  };
 }
 
 export default NumOfEvents;

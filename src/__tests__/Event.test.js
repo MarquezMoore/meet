@@ -1,13 +1,14 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
-import Event from '../components/event/event'
+import Event from '../components/event/event';
+import { getEvents } from '../api'
 
 describe('<Event /> Component', () => {
   let EventWrapper, event, showDetails, details; 
 
   beforeAll(() => {
-    EventWrapper = shallow(<Event />);
+    EventWrapper = shallow(<Event event={{summary: 'test'}}/>);
     event = EventWrapper.find('.event');
     showDetails = event.find('.show-details');
     details = EventWrapper.find('.details');
@@ -24,7 +25,7 @@ describe('<Event /> Component', () => {
   });
 
   it('should show details closed per default', () => {
-    expect(details.prop('hidden')).toEqual(null);
+    expect(details.prop('hidden')).toEqual('hidden');
   });
 
 /*
@@ -32,6 +33,6 @@ describe('<Event /> Component', () => {
 */ 
   it('should show details when user clicks show-details button', () => {
     showDetails.simulate('click');
-    expect(EventWrapper.state('detailStatus')).toEqual('hidden');
+    expect(EventWrapper.state('detailStatus')).toEqual(null);
   });
 });

@@ -34,32 +34,38 @@ describe('<App /> component', () => {
   it('should contain <NumOfEvents /> component', () => {
     expect(AppWrapper.find(NumOfEvents)).toHaveLength(1);
   });
+
 });
 
 describe('<App /> integration', () => {
-  let AppWrapper, AppEventsState, AppLocationsState, CitySearchWrapper, locations;
+  let AppWrapper, AppEventsState, AppLocationsState, CitySearchWrapper, locations, AppNumOfEventsState, NumOfEventsWrapper, EventListWrapper;
 
   beforeEach(() => {
     // const locations = extractLocations();
     AppWrapper = mount(<App />);
     AppEventsState = AppWrapper.state('events');
     AppLocationsState = AppWrapper.state('locations');
+    AppNumOfEventsState = AppWrapper.state('numOfEvents');
     CitySearchWrapper = AppWrapper.find(CitySearch); 
+    EventListWrapper = AppWrapper.find(EventList);
+    NumOfEventsWrapper = AppWrapper.find(NumOfEvents);
     locations = extractLocations(mockData);
   });
+
+  afterEach(() => {
+    AppWrapper.unmount();
+  })
 
   
 
   it('should pass events state to EventList as prop', () => {
     expect(AppEventsState).not.toEqual(undefined);
     expect(AppWrapper.find(EventList).props().events).toEqual(AppEventsState);
-    AppWrapper.unmount();
   });
 
   it('should pass locations state to CitySearc as prop', () => {
     expect(AppLocationsState).not.toEqual(undefined);
     expect(AppWrapper.find(CitySearch).props().locations).toEqual(AppLocationsState);
-    AppWrapper.unmount();
   });
 
   it('get list of events matching the city selected by the user', async () => {
@@ -73,7 +79,6 @@ describe('<App /> integration', () => {
     const allEvents = await getEvents();
     const eventsToShow = allEvents.filter(event => event.location === selectedCity);
     expect(AppWrapper.state('events')).toEqual(eventsToShow);
-    AppWrapper.unmount();
   });
 
   test('get list of all events when user selects "See all cities"', async () => {
@@ -82,6 +87,16 @@ describe('<App /> integration', () => {
     await suggestionItems.at(suggestionItems.length - 1).simulate('click');
     const allEvents = await getEvents();
     expect(AppWrapper.state('events')).toEqual(allEvents);
-    AppWrapper.unmount();
+  });
+
+  it('should pass updateNumOfEvents method to numOfEvents component as prop/callback', () => {
+    expect(AppWrapper.instance().updateEvents).toBeTruthy();
+  })
+
+  it('should contain numOfEventsState that matchs num passed from numOfEvents component', () => {
+    NumOfEventsWrapper.find('.numOfEvents').simulate('change', {
+      target: { value: 1}
+    });
+    expect(AppWrapper.state('numOfEvents')).toEqual(1);
   });
 });
