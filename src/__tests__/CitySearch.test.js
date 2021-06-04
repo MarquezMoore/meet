@@ -65,7 +65,7 @@ describe('<CitySearch /> Component', () => {
     expect(CitySearchWrapper.state("query")).toBe(suggestions[0]);
   });
 
-  it("should show suggestion list when input is not empty", () => {
+  it("should show suggestion list when input is focued", () => {
     CitySearchWrapper.find('.city-search').simulate('focus');
     expect(CitySearchWrapper.state('showSuggestions')).toBe(true);
     expect(CitySearchWrapper.find('.suggestions').prop('style')).not.toEqual({ display: 'none' });

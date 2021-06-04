@@ -5,6 +5,8 @@ import EventList from './components/eventList/eventList';
 import CitySearch from './components/citySearch/citySearch';
 import NumOfEvents from './components/numOfEvents/numOfEvents';
 import { extractLocations, getEvents } from './api' 
+
+import './nprogress.css';
 class App extends React.Component {
   constructor(props) {
     super();
