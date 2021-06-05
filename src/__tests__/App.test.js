@@ -99,4 +99,12 @@ describe('<App /> integration', () => {
     });
     expect(AppWrapper.state('numOfEvents')).toEqual(1);
   });
+
+  it('should have the same events state length as numOfevents state', () => {
+    NumOfEventsWrapper.find('.numOfEvents').simulate('change', {
+      target: { value: 1}
+    });
+    console.log(AppWrapper.state('events').length, AppWrapper.state('numOfEvents') )
+    expect(AppWrapper.state('events').length).toEqual(AppWrapper.state('numOfEvents'));
+  });
 });

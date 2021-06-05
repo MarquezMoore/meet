@@ -39,25 +39,26 @@ class App extends React.Component {
 
   updateEvents = (selectedCity, num ) => {
 
-    getEvents().then((events) => {
-      if(selectedCity) {
+    if(selectedCity){
+      getEvents().then( events => {
         const locationEvents = (selectedCity === 'all') 
-          ? events 
-          : events.filter((event) => event.location === selectedCity);
-      
+        ? events 
+        : events.filter((event) => event.location === selectedCity);
+    
         this.setState({
           events: locationEvents
         });
-      }
+      })
+    }
 
-      if(num){
-        console.log(this.state.numOfEvents)
+    if(num){
+      getEvents().then( e => {
         this.setState({
-          numOfEvents: num
+          numOfEvents: num,
+          events: e.slice(0, num)
         })
-        console.log(this.state.numOfEvents)
-      }
-    });
+      })
+    }
   } 
 
   render () {

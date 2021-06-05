@@ -8,7 +8,12 @@ class NumOfEvents extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
   handleChange = e => {
-    this.props.updateEvents( null, e.target.value);
+    if(e.target.value > 0){
+      this.props.updateEvents( null, e.target.value);
+      console.log('Change to: '+e.target.value)
+    }else{
+      this.props.updateEvents( null, 100000)
+    }
   }
 
   render() {
