@@ -25,12 +25,14 @@ class App extends React.Component {
   componentDidMount() {
     this.mounted = true;
     getEvents().then((events) => {
+      localStorage.setItem('events', JSON.stringify(events));
       if(this.mounted) {
         this.setState({ 
           events, 
           locations: extractLocations(events) });
       }
     });
+
   }
 
   componentWillUnmount(){
@@ -38,26 +40,22 @@ class App extends React.Component {
   }
 
   updateEvents = (selectedCity, num ) => {
-
+    const events = JSON.parse(localStorage.getItem('events'));
     if(selectedCity){
-      getEvents().then( events => {
-        const locationEvents = (selectedCity === 'all') 
-        ? events 
-        : events.filter((event) => event.location === selectedCity);
-    
-        this.setState({
-          events: locationEvents
-        });
-      })
+      const locationEvents = (selectedCity === 'all')
+      ? events 
+      : events.filter((event) => event.location === selectedCity);
+  
+      this.setState({
+        events: locationEvents
+      });
     }
 
     if(num){
-      getEvents().then( e => {
-        this.setState({
-          numOfEvents: num,
-          events: e.slice(0, num)
-        })
-      })
+      this.setState({
+        numOfEvents: num,
+        events: events.slice(0, num)
+      });
     }
   } 
 
