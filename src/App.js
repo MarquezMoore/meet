@@ -1,6 +1,4 @@
 import React from 'react';
-
-
 import EventList from './components/eventList/eventList';
 import CitySearch from './components/citySearch/citySearch';
 import NumOfEvents from './components/numOfEvents/numOfEvents';

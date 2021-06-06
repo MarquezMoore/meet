@@ -2,12 +2,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import Event from '../components/event/event';
+import mockData from '../mock-data'
 
 describe('<Event /> Component', () => {
   let EventWrapper, event, toggleDetails, details; 
 
   beforeAll(() => {
-    EventWrapper = shallow(<Event event={{summary: 'test'}}/>);
+    EventWrapper = shallow(<Event event={mockData[0]}/>);
     event = EventWrapper.find('.event');
     toggleDetails = event.find('.toggle-details');
     details = EventWrapper.find('.details');
