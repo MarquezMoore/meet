@@ -104,7 +104,6 @@ describe('<App /> integration', () => {
     NumOfEventsWrapper.find('.numOfEvents').simulate('change', {
       target: { value: 1}
     });
-    console.log(AppWrapper.state('events').length, AppWrapper.state('numOfEvents') )
     expect(AppWrapper.state('events').length).toEqual(AppWrapper.state('numOfEvents'));
   });
 });

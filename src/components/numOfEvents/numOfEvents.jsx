@@ -10,7 +10,6 @@ class NumOfEvents extends React.Component {
   handleChange = e => {
     if(e.target.value > 0){
       this.props.updateEvents( null, e.target.value);
-      console.log('Change to: '+e.target.value)
     }else{
       this.props.updateEvents( null, 100000)
     }
@@ -22,6 +21,7 @@ class NumOfEvents extends React.Component {
         <input 
           type="text" 
           className="numOfEvents"
+          placeholder="enter num of events"
           onChange={this.handleChange}
         ></input>
       </div>
