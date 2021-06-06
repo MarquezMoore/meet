@@ -26,7 +26,7 @@ describe('End-To-End-Test', () => {
   });
 
   test('User can expand an event to see its details', async () => {
-    await page.click('.show-details');
+    await page.click('.toggle-details');
     const oneDetailShown = await page.$eval('.details', d => {
       return !d.hasAttribute('hidden') ? true : false;
     });
@@ -34,7 +34,7 @@ describe('End-To-End-Test', () => {
   });
 
   test('User can collapse an event to hide its details', async () => {
-    await page.click('.show-details');
+    await page.click('.toggle-details');
     const oneDetailShown = await page.$eval('.details', d => {
       return d.hasAttribute('hidden') ? true : false;
     });

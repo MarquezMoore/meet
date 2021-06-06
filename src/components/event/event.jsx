@@ -31,10 +31,10 @@ class Event extends React.Component {
           <span className="fs-5">{event.location}</span>
         </div>
         <Button 
-          className="show-details m-2"
+          className="toggle-details m-2"
           onClick={this.toggleDetails}
         >
-          Show Details
+          {this.state.detailStatus === 'hidden' ? 'Show Details' : 'Hide Details'}
         </Button>
         <div 
           hidden={this.state.detailStatus} 
