@@ -20,7 +20,7 @@ class CitySearch extends React.Component{
       this.setState({
         showSuggestions: false
       })
-    }, 150)
+    }, 300)
   }
 
   handleClick = (suggestion) => {
