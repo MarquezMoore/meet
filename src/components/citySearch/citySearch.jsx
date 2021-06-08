@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React from 'react';
+import { InfoAlert } from '../alerts/alert';
 class CitySearch extends React.Component{
   constructor(props){
     super();
@@ -7,11 +7,20 @@ class CitySearch extends React.Component{
     this.state = {
       query: '',
       suggestions: [],
-      showSuggestions: undefined
+      showSuggestions: undefined,
+      infoText: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+  }
+  handleBlur = e => {
+    setTimeout( ()=> {
+      this.setState({
+        showSuggestions: false
+      })
+    }, 150)
   }
 
   handleClick = (suggestion) => {
@@ -26,19 +35,30 @@ class CitySearch extends React.Component{
 
   handleChange = (e) => {
     const value = e.target.value;
-
     const suggestions = this.props.locations.filter( location => {
       return location.toUpperCase().indexOf(value.toUpperCase()) > -1;
     })
-    this.setState({
-      query: e.target.value,
-      suggestions
-    })
+
+    
+    suggestions.length
+      ? this.setState({
+          query: e.target.value,
+          suggestions,
+          infoText: ''
+      })
+      : this.setState({
+          query: e.target.value,
+          suggestions,
+          infoText: 'We can not find the city you are looking for. Please try another city',
+      })
+
+    
   }
   
   render(){
     return(
       <div className="CitySearch d-flex flex-column align-items-center">
+        <InfoAlert className="info" text={this.state.infoText} />
         <input 
           placeholder='Filter by city'
           className="city-search w-25" 
@@ -46,6 +66,7 @@ class CitySearch extends React.Component{
           value={this.state.query}
           onChange={this.handleChange}
           onFocus={() => {this.setState({ showSuggestions: true })}}
+          onBlur={this.handleBlur}
           />
         <ul 
           className="suggestions w-25  flex-column align-items-center"
