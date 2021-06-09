@@ -14,7 +14,7 @@ class App extends React.Component {
     this.state = {
       events: [],
       locations: [],
-      numOfEvents: null
+      numOfEvents: 32
     }
 
     this.updateEvents = this.updateEvents.bind(this);
