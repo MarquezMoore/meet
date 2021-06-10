@@ -8,13 +8,15 @@ import { extractLocations, getEvents } from './api'
 import './App.css';
 import './nprogress.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { WarningAlert } from './components/alerts/alert'
 class App extends React.Component {
   constructor(props) {
     super();
     this.state = {
       events: [],
       locations: [],
-      numOfEvents: 32
+      numOfEvents: 32,
+      networkStatus: navigator.onLine ? 'Online' : 'Offline'
     }
 
     this.updateEvents = this.updateEvents.bind(this);
@@ -30,7 +32,7 @@ class App extends React.Component {
           locations: extractLocations(events) });
       }
     });
-
+    console.log(this.state.networkStatus);
   }
 
   componentWillUnmount(){
@@ -60,6 +62,9 @@ class App extends React.Component {
   render () {
     return (
       <div className="App m-4">
+        <WarningAlert 
+        className="networkStatus">{this.state.networkStatus === 'Offline' ? 'Offline' : ''}
+        </WarningAlert>
         <CitySearch 
           locations={this.state.locations} 
           updateEvents={this.updateEvents}
@@ -70,6 +75,7 @@ class App extends React.Component {
         <EventList 
           events = {this.state.events} 
         />
+        
       </div>
     );
   };
