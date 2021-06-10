@@ -32,7 +32,7 @@ class App extends React.Component {
           locations: extractLocations(events) });
       }
     });
-    console.log(this.state.networkStatus);
+    console.log('Newtwork Status: '+this.state.networkStatus);
   }
 
   componentWillUnmount(){
