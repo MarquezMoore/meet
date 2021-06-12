@@ -31,6 +31,7 @@ export const getAccessToken = async () => {
       const { authUrl } = results.data;
       return (window.location.href = authUrl);
     }
+    // Refresh browers using auth url for user authorization
     return code && getToken(code);
   }
   return accessToken;

@@ -29,22 +29,13 @@ class App extends React.Component {
   async componentDidMount() {
     this.mounted = true;
 
-    getEvents().then((events) => {
-      localStorage.setItem('events', JSON.stringify(events));
-      if(this.mounted) {
-        this.setState({ 
-          events, 
-          locations: extractLocations(events) });
-      }
-    });
-
-    console.log('Newtwork Status: '+this.state.networkStatus);
-
     const accessToken = localStorage.getItem('access_token');
     const isTokenValid = (await checkToken(accessToken)).error ? false : true;
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get("code");
+    // If code in url or accessToken is valid dont show welcome screen else show welcome screen for authorization
     this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+    // If the code or are accessToken are valid, get events
     if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
@@ -59,7 +50,8 @@ class App extends React.Component {
   }
 
   updateEvents = (selectedCity, num ) => {
-    const events = JSON.parse(localStorage.getItem('events'));
+    // const events = JSON.parse(localStorage.getItem('events'));
+    const events = getEvents();
     if(selectedCity){
       const locationEvents = (selectedCity === 'all')
       ? events 

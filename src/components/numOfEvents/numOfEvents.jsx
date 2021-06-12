@@ -15,7 +15,6 @@ class NumOfEvents extends React.Component {
     const numConstraint = new RegExp(/\b(0?[1-9]|[1-2][0-9]|3[0-2])\b/);
     
     if(!numConstraint.test(value)){
-      console.log(typeof value)
       this.setState({
         infoText: 'Enter number between 1 - 32'
       });
