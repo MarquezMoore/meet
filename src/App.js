@@ -29,13 +29,13 @@ class App extends React.Component {
   async componentDidMount() {
     this.mounted = true;
 
-    const accessToken = localStorage.getItem('access_token');
-    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    const access_token = localStorage.getItem('access_token');
+    const isTokenValid = (await checkToken(access_token)).error ? false : true;
     const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get("code");
-    // If code in url or accessToken is valid dont show welcome screen else show welcome screen for authorization
+    // If code in url or access_token is valid dont show welcome screen else show welcome screen for authorization
     this.setState({ showWelcomeScreen: !(code || isTokenValid) });
-    // If the code or are accessToken are valid, get events
+    // If the code or are access_token are valid, get events
     if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
         if (this.mounted) {
@@ -71,7 +71,7 @@ class App extends React.Component {
   } 
 
   render () {
-    if (this.state.showWelcomeScreen === undefined ) return  <div lassName="App" />
+    if (this.state.showWelcomeScreen === undefined ) return  <div className="App" />
 
     return (
       <div className="App">

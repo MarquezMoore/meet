@@ -23,7 +23,7 @@ describe('<App /> component', () => {
     AppWrapper = shallow(<App />);
   });
 
-  it('should render list of events', () => {
+  it('should render list of events component', () => {
     expect(AppWrapper.find(EventList)).toHaveLength(1);
   });
 

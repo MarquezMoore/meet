@@ -2,10 +2,10 @@ import mockData from './mock-data';
 import axios from 'axios';
 import NProgress from 'nprogress';
 
-export const checkToken = async (accessToken) => {
-  // Try to access the google calendar API with the accessToken
+export const checkToken = async (access_token) => {
+  // Try to access the google calendar API with the access_token
   const result = await fetch(
-    `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
+    `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${access_token}`
   )
     .then((res) => res.json())
     .catch((error) => error.json());
@@ -15,12 +15,12 @@ export const checkToken = async (accessToken) => {
 
 export const getAccessToken = async () => {
   // Check the local storage for access token
-  const accessToken = localStorage.getItem('accessToken');
-  // Check if the accessToken was found in localStorage and that it is still valid
-  // accessToken must be true before checkToken runs (Short curcit)
-  const tokenCheck = accessToken && (await checkToken(accessToken));
-  // If the accessToken is not found in localStorage or the token is invalidated through the checktTokeb API then run the following statements
-  if (!accessToken || tokenCheck.error) {
+  const access_token = localStorage.getItem('access_token');
+  // Check if the access_token was found in localStorage and that it is still valid
+  // access_token must be true before checkToken runs (Short curcit)
+  const tokenCheck = access_token && (await checkToken(access_token));
+  // If the access_token is not found in localStorage or the token is invalidated through the checktTokeb API then run the following statements
+  if (!access_token || tokenCheck.error) {
     await localStorage.removeItem("access_token");
     const searchParams = new URLSearchParams(window.location.search);
     const code = await searchParams.get("code");
@@ -34,7 +34,7 @@ export const getAccessToken = async () => {
     // Refresh browers using auth url for user authorization
     return code && getToken(code);
   }
-  return accessToken;
+  return access_token;
 }
 
 export const extractLocations = events => {
@@ -52,7 +52,6 @@ export const getEvents = async () => {
   }
 
   if (!navigator.onLine) {
-    console.log('Running Offline')
     const data = localStorage.getItem("lastEvents");
     NProgress.done();
     return data
