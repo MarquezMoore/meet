@@ -28,6 +28,16 @@ class App extends React.Component {
 
   async componentDidMount() {
     this.mounted = true;
+    /* 
+
+    Used to test on local machine
+
+    getEvents().then((events) => {
+      if (this.mounted) {
+        this.setState({ events, locations: extractLocations(events) });
+      }
+    });
+    */
 
     const access_token = localStorage.getItem('access_token');
     const isTokenValid = (await checkToken(access_token)).error ? false : true;
@@ -51,27 +61,32 @@ class App extends React.Component {
 
   updateEvents = (selectedCity, num ) => {
     // const events = JSON.parse(localStorage.getItem('events'));
-    const events = getEvents();
-    if(selectedCity){
-      const locationEvents = (selectedCity === 'all')
-      ? events 
-      : events.filter((event) => event.location === selectedCity);
-  
-      this.setState({
-        events: locationEvents
-      });
-    }
-
-    if(num){
-      this.setState({
-        numOfEvents: num,
-        events: events.slice(0, num)
-      });
-    }
+    getEvents()
+      .then( events => {
+        if(selectedCity){
+          const locationEvents = (selectedCity === 'all')
+          ? events 
+          : events.filter((event) => event.location === selectedCity);
+      
+          this.setState({
+            events: locationEvents
+          });
+        }
+    
+        if(num){
+          this.setState({
+            numOfEvents: num,
+            events: events.slice(0, num)
+          });
+        }
+      })
+      .catch( e => {
+        console.log(e);
+      })
   } 
 
   render () {
-    if (this.state.showWelcomeScreen === undefined ) return  <div className="App" />
+    // if (this.state.showWelcomeScreen === undefined ) return  <div className="App" />
 
     return (
       <div className="App">
