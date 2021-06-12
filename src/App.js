@@ -60,7 +60,6 @@ class App extends React.Component {
   }
 
   updateEvents = (selectedCity, num ) => {
-    // const events = JSON.parse(localStorage.getItem('events'));
     getEvents()
       .then( events => {
         if(selectedCity){
