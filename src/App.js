@@ -28,9 +28,9 @@ class App extends React.Component {
 
   async componentDidMount() {
     this.mounted = true;
-    /* 
+    
 
-    Used to test on local machine
+    /* Used to test on local machine
 
     getEvents().then((events) => {
       if (this.mounted) {
@@ -68,7 +68,7 @@ class App extends React.Component {
           : events.filter((event) => event.location === selectedCity);
       
           this.setState({
-            events: locationEvents
+            events: locationEvents.slice(0, this.state.numOfEvents)
           });
         }
     
