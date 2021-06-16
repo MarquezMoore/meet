@@ -1,5 +1,12 @@
 .event{
   position: relative;
+  background-color: #333333;
+}
+.event-location{
+  font-size: .8rem;
+}
+.location-icon{
+  top: 2.5px;
 }
 
 
@@ -8,4 +15,8 @@
   position: absolute;
   right: 0;
   bottom: 0;
+  background-color: transparent;
+  border: none;
+  color: #e2d36b;
+  font-size: .9rem;
 }

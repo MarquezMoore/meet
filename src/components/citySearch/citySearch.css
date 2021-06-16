@@ -1,6 +1,17 @@
 .CitySearch{
   position: relative;
 }
+.city-search{
+  outline: none;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #333333;
+  width: 100%;
+  transition: all 500ms;
+}
+.city-search:focus{
+  border-bottom: 1px solid #e2d36b;
+}
 .suggestions{
   list-style: none;
   margin: 0;

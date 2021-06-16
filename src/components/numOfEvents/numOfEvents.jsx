@@ -31,14 +31,15 @@ class NumOfEvents extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="py-4 d-flex flex-row-reverse">
         <input 
           type="text" 
-          className="numOfEvents"
-          placeholder="enter num of events"
+          className="numOfEvents rounded text-align-center"
           onChange={this.handleChange}
+          placeholder="32"
         ></input>
-        <ErrorAlert text={this.state.infoText} />
+        <span className="pe-2">Events displayed: </span>
+        {/* <ErrorAlert text={this.state.infoText} /> */}
       </div>
     );
   };

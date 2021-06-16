@@ -2,8 +2,17 @@
 
 .App{
   max-height: 100vh;
+  color: white;
 }
 
 .container{
   position: relative;
+}
+
+.charts-section{
+  background-color: #333333;
+}
+
+.events-section{
+  background-color: #222222;
 }

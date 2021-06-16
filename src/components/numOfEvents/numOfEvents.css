@@ -1,0 +1,14 @@
+.numOfEvents{
+  width: 40px;
+  height: 25px;
+  background-color: #333333;
+  border: none;
+  text-align: center;
+  color: white;
+  transition: all 500ms;
+  font-size: 12px;
+}
+.numOfEvents:focus{
+  outline: none;
+  border: 1px solid #e2d36b;
+}

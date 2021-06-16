@@ -59,11 +59,11 @@ class CitySearch extends React.Component{
   
   render(){
     return(
-      <div className="CitySearch d-flex flex-column align-items-center">
+      <div className="CitySearch">
         <InfoAlert className="info" text={this.state.infoText} />
         <input 
           placeholder='Filter by city'
-          className="city-search w-25" 
+          className="city-search p-2" 
           type="text"
           value={this.state.query}
           onChange={this.handleChange}

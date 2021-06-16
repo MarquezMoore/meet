@@ -5,7 +5,7 @@ import NumOfEvents from './components/numOfEvents/numOfEvents';
 import { getEvents, extractLocations, checkToken, getAccessToken } from
 './api';
 import {
-  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip
+  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
 import Navbar from './components/navbar/navbar'
 
@@ -115,22 +115,22 @@ class App extends React.Component {
         <Navbar />
         <Container fluid className="">
           <Row>
-            <Col md={5} className="d-flex bg-dark justify-content-center align-items-center">
-              <ScatterChart
-                width={400}
-                height={400}
-                margin={{
-                  top: 20, right: 20, bottom: 20, left: 20,
-                }}
-              >
-                <CartesianGrid />
-                <XAxis type="category" dataKey="city" name="city" />
-                <YAxis type="number" dataKey="number" name="number of events" />
-                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                <Scatter data={this.getData()} fill="#8884d8" />
-              </ScatterChart>
+            <Col md={5} className="charts-section d-flex justify-content-center align-items-center">
+              <ResponsiveContainer width="100%" height="80%" >
+                <ScatterChart
+                  margin={{
+                    top: 50, right: 40, bottom: 50, left: 0,
+                  }}
+                >
+                  <CartesianGrid />
+                  <XAxis type="category" dataKey="city" name="city" />
+                  <YAxis type="number" dataKey="number" name="number of events" />
+                  <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                  <Scatter data={this.getData()} fill="#e2d36b" />
+                </ScatterChart>
+              </ResponsiveContainer>
             </Col>
-            <Col md={7}>
+            <Col className="events-section px-5" md={7} style={{height: '80%'}}>
               <CitySearch ocations={locations} updateEvents={this.updateEvents}/>
               <NumOfEvents updateEvents={this.updateEvents}/>
               <EventList events = {events} />
