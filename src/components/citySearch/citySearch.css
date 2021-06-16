@@ -1,0 +1,20 @@
+.CitySearch{
+  position: relative;
+}
+.suggestions{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 30px;
+  background-color: gray;
+  z-index: 10000;
+}
+.suggestions li{
+  transition: all 300ms;
+  padding-left: .5rem;
+}
+.suggestions li:hover{
+  cursor: pointer;
+  transform: scale(1.005);
+}

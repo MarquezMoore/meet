@@ -1,0 +1,12 @@
+.Alert{
+  /* position: absolute; */
+}
+.info{
+  bottom: 25px;
+}
+.error{
+  bottom: 20px;
+}
+.networkStatus{
+  position: fixed;
+}

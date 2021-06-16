@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Button } from 'react-bootstrap';
 
+import './event.css'
+
 class Event extends React.Component {
   constructor(props) {
     super();

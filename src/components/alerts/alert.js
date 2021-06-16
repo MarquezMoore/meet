@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './alert.css';
+
 class Alert extends React.Component {
   constructor(props) {
     super(props);
