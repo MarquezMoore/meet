@@ -63,7 +63,7 @@ class CitySearch extends React.Component{
         <InfoAlert className="info" text={this.state.infoText} />
         <input 
           placeholder='Filter by city'
-          className="city-search p-2" 
+          className="city-search py-3" 
           type="text"
           value={this.state.query}
           onChange={this.handleChange}
@@ -71,7 +71,7 @@ class CitySearch extends React.Component{
           onBlur={this.handleBlur}
           />
         <ul 
-          className="suggestions w-25  flex-column align-items-center"
+          className="suggestions w-100 flex-column align-items-center"
           style={
             this.state.showSuggestions ? {display: 'flex'} : {display: 'none'} 
           }

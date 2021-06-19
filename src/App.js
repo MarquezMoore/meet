@@ -1,22 +1,27 @@
+// Node Modules
 import React from 'react';
-import EventList from './components/eventList/eventList';
-import CitySearch from './components/citySearch/citySearch';
-import NumOfEvents from './components/numOfEvents/numOfEvents';
-import { getEvents, extractLocations, checkToken, getAccessToken } from
-'./api';
+import { Container, Row, Col } from 'react-bootstrap';
 import {
   ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
+
+// Custom Components
+import EventList from './components/eventList/eventList';
+import CitySearch from './components/citySearch/citySearch';
+import NumOfEvents from './components/numOfEvents/numOfEvents';
+import WelcomeScreen from './components/welcomeScreen/welcomeScreen';
 import Navbar from './components/navbar/navbar'
+import EventGenre from './components/eventGenre/eventGerne';
+import { WarningAlert } from './components/alerts/alert'
 
-import { Container, Row, Col } from 'react-bootstrap';
-
-
+// Custom Stylesheets
 import './App.css';
 import './nprogress.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { WarningAlert } from './components/alerts/alert'
-import WelcomeScreen from './components/welcomeScreen/welcomeScreen';
+
+// Custom API Methods
+import { getEvents, extractLocations, checkToken, getAccessToken } from
+'./api';
 
 class App extends React.Component {
   constructor(props) {
@@ -40,27 +45,27 @@ class App extends React.Component {
 
     // Function below is used to test on local machine 
 
-    getEvents().then((events) => {
-      if (this.mounted) {
-        this.setState({ events, locations: extractLocations(events) });
-      }
-    });
+    // getEvents().then((events) => {
+    //   if (this.mounted) {
+    //     this.setState({ events, locations: extractLocations(events) });
+    //   }
+    // });
     
 
-    // const access_token = localStorage.getItem('access_token');
-    // const isTokenValid = (await checkToken(access_token)).error ? false : true;
-    // const searchParams = new URLSearchParams(window.location.search);
-    // const code = searchParams.get("code");
-    // // If code in url or access_token is valid dont show welcome screen else show welcome screen for authorization
-    // this.setState({ showWelcomeScreen: !(code || isTokenValid) });
-    // // If the code or are access_token are valid, get events
-    // if ((code || isTokenValid) && this.mounted) {
-    //   getEvents().then((events) => {
-    //     if (this.mounted) {
-    //       this.setState({ events, locations: extractLocations(events) });
-    //     }
-    //   });
-    // }
+    const access_token = localStorage.getItem('access_token');
+    const isTokenValid = (await checkToken(access_token)).error ? false : true;
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get("code");
+    // If code in url or access_token is valid dont show welcome screen else show welcome screen for authorization
+    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+    // If the code or are access_token are valid, get events
+    if ((code || isTokenValid) && this.mounted) {
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({ events, locations: extractLocations(events) });
+        }
+      });
+    }
   }
 
   componentWillUnmount(){
@@ -98,42 +103,45 @@ class App extends React.Component {
       const city = location.split(', ').shift()
       return {city, number};
     })
-    console.log(data)
     return data;
   };
 
   render () {
     const { networkStatus, locations, events, showWelcomeScreen } = this.state;
-    // if (this.state.showWelcomeScreen === undefined ) return  <div className="App" />
+    if (this.state.showWelcomeScreen === undefined ) return  <div className="App" />
 
     return (
       <div className="App" >
-        {/* <WarningAlert
-          className="networkStatus" 
-          text={networkStatus === 'Offline' ? 'Offline' : ''}
-        /> */}
+        <WarningAlert
+          text={networkStatus === 'Offline' ? 'App is running offline: data may not be updated' : ''}
+        />
         <Navbar />
-        <Container fluid className="">
-          <Row>
-            <Col md={5} className="charts-section d-flex justify-content-center align-items-center">
-              <ResponsiveContainer width="100%" height="80%" >
-                <ScatterChart
-                  margin={{
-                    top: 50, right: 40, bottom: 50, left: 0,
-                  }}
-                >
-                  <CartesianGrid />
-                  <XAxis type="category" dataKey="city" name="city" />
-                  <YAxis type="number" dataKey="number" name="number of events" />
-                  <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                  <Scatter data={this.getData()} fill="#e2d36b" />
-                </ScatterChart>
-              </ResponsiveContainer>
+        <Container fluid >
+          <Row className="body">
+            <Col md={5} className="charts-section ">
+              <div className="data-vis-wrapper h-100">
+                <EventGenre events={events} />
+                {/* <ResponsiveContainer height={400} >
+                  <ScatterChart
+                    margin={{
+                      top: 50, right: 40, bottom: 50, left: 0,
+                    }}
+                  >
+                    <CartesianGrid />
+                    <XAxis type="category" dataKey="city" name="city" />
+                    <YAxis type="number" dataKey="number" name="number of events" allowDecimals={false}/>
+                    <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                    <Scatter data={this.getData()} fill="#e2d36b" />
+                  </ScatterChart>
+                </ResponsiveContainer> */}
+              </div>
             </Col>
-            <Col className="events-section px-5" md={7} style={{height: '80%'}}>
-              <CitySearch ocations={locations} updateEvents={this.updateEvents}/>
+            <Col className="events-section px-5 h-100" md={7} >
+              <CitySearch locations={locations} updateEvents={this.updateEvents}/>
               <NumOfEvents updateEvents={this.updateEvents}/>
-              <EventList events = {events} />
+              <div className="eventList-container h-75 overflow-scroll">
+                <EventList events = {events} />
+              </div>
             </Col>
           </Row>
         </Container>

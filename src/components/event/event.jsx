@@ -25,7 +25,7 @@ class Event extends React.Component {
   render() {
     const { event } = this.props;
     return ( 
-      <div className="event pt-3 pb-5 px-4 mb-3 border rounded-3 border-secondary">
+      <div className="event pt-3 pb-5 px-4 mb-3 rounded-3 border-secondary">
         <div className="event-overview d-flex flex-column justify-content-between">
           <span className="event-location position-relative pb-2 ps-3">
             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#e2d36b" className="location-icon position-absolute start-0" viewBox="0 0 16 16">
@@ -33,7 +33,7 @@ class Event extends React.Component {
             </svg>
             {event.location}
           </span>
-          <span className="event-name fs-5 fw-bold">{event.summary}</span>
+          <span className="event-name fs-5 pb-2 fw-bold">{event.summary}</span>
         </div>
         <button
           className="toggle-details m-2 px-2 rounded "
@@ -41,7 +41,7 @@ class Event extends React.Component {
         >
           {this.state.detailStatus === 'hidden' ? 'Show Details' : 'Hide Details'}
         </button>
-        <div 
+        <div
           hidden={this.state.detailStatus} 
           className="details">
           {event.description}

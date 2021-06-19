@@ -1,12 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
 
 .App{
-  max-height: 100vh;
   color: white;
+  position: relative;
 }
 
 .container{
   position: relative;
+}
+.body{
+  height: 90vh;
 }
 
 .charts-section{

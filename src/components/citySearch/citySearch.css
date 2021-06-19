@@ -8,6 +8,7 @@
   border-bottom: 1px solid #333333;
   width: 100%;
   transition: all 500ms;
+  color: white;
 }
 .city-search:focus{
   border-bottom: 1px solid #e2d36b;
@@ -17,9 +18,10 @@
   margin: 0;
   padding: 0;
   position: absolute;
-  top: 30px;
-  background-color: gray;
+  top: 55px;
+  background-color:#444444;
   z-index: 10000;
+  border-radius: 0 0 5px 5px;
 }
 .suggestions li{
   transition: all 300ms;

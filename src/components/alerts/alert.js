@@ -22,7 +22,7 @@ class Alert extends React.Component {
   render() {
     return (
       <div className={this.getClassNames()}>
-        <p style={this.getStyle()}>{this.props.text}</p>
+        <span style={this.getStyle()}>{this.props.text}</span>
       </div>
     );
   }
@@ -33,20 +33,22 @@ class Alert extends React.Component {
 export class InfoAlert extends Alert {
   constructor(props) {
     super(props);
-    this.color = 'blue';
+    this.color = '#31708f';
     this.classNames = 'Alert info';
   }
 }
 export class ErrorAlert extends Alert {
   constructor(props) {
     super(props);
-    this.color = 'red';
+    this.color = '#D8000C';
     this.classNames = 'Alert error';
   }
 }
 export class WarningAlert extends Alert {
   constructor(props) {
     super(props);
-    this.color = 'yellow';
+    this.color = '#9F6000';
+    this.classNames = 'Alert warning bg-dark text-center bg-gradient';
+    // Wrapper should be #FEEFB3
   }
 }
