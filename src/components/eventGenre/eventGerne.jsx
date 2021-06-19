@@ -42,7 +42,8 @@ const EventGenre = ({ events }) => {
             fill="#e2d36b"
             paddingAngle={10}
             dataKey="value"
-            label={ ({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%` }
+            // labelLine={false}
+            label={ ({ percent }) => `${(percent * 100).toFixed(0)}%` }
             
           >
             <Label value={`Total: ${events.length}`} offset={0} position="center" fill={colors[0]} />

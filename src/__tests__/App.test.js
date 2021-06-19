@@ -93,15 +93,13 @@ describe('<App /> integration', () => {
     expect(AppWrapper.instance().updateEvents).toBeTruthy();
   })
 
-  it('should contain numOfEventsState that matchs num passed from numOfEvents component', () => {
-    NumOfEventsWrapper.find('.numOfEvents').simulate('change', {
-      target: { value: 1}
-    });
+  it('should contain numOfEvents state that matchs num passed from numOfEvents component', async () => {
+    await NumOfEventsWrapper.find('.numOfEvents').simulate('change', { target: { value: 1} });
     expect(AppWrapper.state('numOfEvents')).toEqual(1);
   });
 
-  it('should have the same events state length as numOfevents state', () => {
-    NumOfEventsWrapper.find('.numOfEvents').simulate('change', {
+  it('should have the same events state length as numOfevents state', async () => {
+    await NumOfEventsWrapper.find('.numOfEvents').simulate('change', {
       target: { value: 1}
     });
     expect(AppWrapper.state('events').length).toEqual(AppWrapper.state('numOfEvents'));
