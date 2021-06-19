@@ -8,7 +8,7 @@ export const checkToken = async (access_token) => {
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${access_token}`
   )
     .then((res) => res.json())
-    .catch((error) => error.json());
+    .catch((error) => error);
   // result should be the list of events return from the google API
   return result;
 };
