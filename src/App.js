@@ -29,7 +29,7 @@ class App extends React.Component {
     this.state = {
       events: [],
       locations: [],
-      numOfEvents: 32,
+      numOfEvents: 2,
       networkStatus: navigator.onLine ? 'Online' : 'Offline',
       showWelcomeScreen: undefined,
       cityFilter: null
@@ -47,7 +47,9 @@ class App extends React.Component {
 
     // getEvents().then((events) => {
     //   if (this.mounted) {
-    //     this.setState({ events, locations: extractLocations(events) });
+    //     console.log(events.slice(0 ,this.state.numOfEvents))
+    //     const e = events.slice(0 ,this.state.numOfEvents)
+    //     this.setState({ events: e, locations: extractLocations(events) });
     //   }
     // });
     
@@ -61,8 +63,9 @@ class App extends React.Component {
     // If the code or are access_token are valid, get events
     if ((code || isTokenValid) && this.mounted) {
       getEvents().then((events) => {
+        const limitedEvents = events.slice(0 ,this.state.numOfEvents);
         if (this.mounted) {
-          this.setState({ events, locations: extractLocations(events) });
+          this.setState({ events: limitedEvents, locations: extractLocations(events) });
         }
       });
     }
