@@ -29,7 +29,7 @@ class App extends React.Component {
     this.state = {
       events: [],
       locations: [],
-      numOfEvents: 2,
+      numOfEvents: 32,
       networkStatus: navigator.onLine ? 'Online' : 'Offline',
       showWelcomeScreen: undefined,
       cityFilter: null
