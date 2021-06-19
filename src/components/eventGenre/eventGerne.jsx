@@ -12,12 +12,13 @@ const EventGenre = ({ events }) => {
   const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'AngularJS'];
 
   const getData = () => {
-    const data = genres.map( g => {
+    let data = genres.map( g => {
       const name = g;
       const value = events.filter( e => e.summary.split(' ').includes(g)).length;
       return { name, value }
     });
 
+    data = data.filter( d => d.value > 0)
     data.sort( (a, b) => b.value - a.value);
     return data;
   }
