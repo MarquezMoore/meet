@@ -45,27 +45,27 @@ class App extends React.Component {
 
     // Function below is used to test on local machine 
 
-    getEvents().then((events) => {
-      if (this.mounted) {
-        this.setState({ events, locations: extractLocations(events) });
-      }
-    });
+    // getEvents().then((events) => {
+    //   if (this.mounted) {
+    //     this.setState({ events, locations: extractLocations(events) });
+    //   }
+    // });
     
 
-    // const access_token = localStorage.getItem('access_token');
-    // const isTokenValid = (await checkToken(access_token)).error ? false : true;
-    // const searchParams = new URLSearchParams(window.location.search);
-    // const code = searchParams.get("code");
-    // // If code in url or access_token is valid dont show welcome screen else show welcome screen for authorization
-    // this.setState({ showWelcomeScreen: !(code || isTokenValid) });
-    // // If the code or are access_token are valid, get events
-    // if ((code || isTokenValid) && this.mounted) {
-    //   getEvents().then((events) => {
-    //     if (this.mounted) {
-    //       this.setState({ events, locations: extractLocations(events) });
-    //     }
-    //   });
-    // }
+    const access_token = localStorage.getItem('access_token');
+    const isTokenValid = (await checkToken(access_token)).error ? false : true;
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get("code");
+    // If code in url or access_token is valid dont show welcome screen else show welcome screen for authorization
+    this.setState({ showWelcomeScreen: !(code || isTokenValid) });
+    // If the code or are access_token are valid, get events
+    if ((code || isTokenValid) && this.mounted) {
+      getEvents().then((events) => {
+        if (this.mounted) {
+          this.setState({ events, locations: extractLocations(events) });
+        }
+      });
+    }
   }
 
   componentWillUnmount(){
@@ -108,7 +108,7 @@ class App extends React.Component {
 
   render () {
     const { networkStatus, locations, events, showWelcomeScreen } = this.state;
-    // if (this.state.showWelcomeScreen === undefined ) return  <div className="App" />
+    if (this.state.showWelcomeScreen === undefined ) return  <div className="App" />
 
     return (
       <div className="App" >
@@ -147,10 +147,10 @@ class App extends React.Component {
         </Container>
     
         {/* Start of Welcome */}
-        {/* <WelcomeScreen 
+        <WelcomeScreen 
           showWelcomeScreen={showWelcomeScreen}
           getAccessToken={() => { getAccessToken() }} 
-        /> */}
+        />
         {/* End of welcome */}
       </div>
     );
