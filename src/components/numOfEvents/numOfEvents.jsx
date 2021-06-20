@@ -26,17 +26,17 @@ class NumOfEvents extends React.Component {
 
       this.props.updateEvents( null, value)
     }
-      // this.props.updateEvents( null, 100000);
   }
 
   render() {
+    const { numOfEvents } = this.props;
     return (
       <div className="numOfEvents-header py-4 d-flex flex-row-reverse align-items-center">
         <input 
           type="text" 
           className="numOfEvents rounded text-align-center"
           onChange={this.handleChange}
-          placeholder="32"
+          placeholder={numOfEvents}
         ></input>
         <span className="pe-2">Events displayed: </span>
         <ErrorAlert text={this.state.infoText} />

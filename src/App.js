@@ -77,8 +77,7 @@ class App extends React.Component {
 
   updateEvents = (selectedCity, num ) => {
     // Update state based on pass parameters
-   
-   
+
     getEvents()
       .then( events => {
         if(selectedCity){
@@ -111,7 +110,7 @@ class App extends React.Component {
 
   render () {
     const { networkStatus, locations, events, showWelcomeScreen } = this.state;
-    if (this.state.showWelcomeScreen === undefined ) return  <div className="App" />
+    if (showWelcomeScreen === undefined ) return  <div className="App" />
 
     return (
       <div className="App" >
@@ -141,7 +140,7 @@ class App extends React.Component {
             </Col>
             <Col className="events-section px-5 h-100" md={7} >
               <CitySearch locations={locations} updateEvents={this.updateEvents}/>
-              <NumOfEvents updateEvents={this.updateEvents}/>
+              <NumOfEvents updateEvents={this.updateEvents} numOfEvents={events.length}/>
               <div className="eventList-container h-75 overflow-scroll">
                 <EventList events = {events} />
               </div>
