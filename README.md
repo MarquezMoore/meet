@@ -5,14 +5,14 @@
   <a href="https://marquezmoore.github.io/meet/" alt="View in browser">View in Browser</a>
 </div>
 
-
+## Table of Contents
 - [Objective](#Objective)
 - [Technologies](#Technologies)
 - [User-Stories](#User-Stories)
 - [Requirements](#Requirements)
 
 ## Demo
-![See in action!](./assets/meetDEMO.gif)
+![See in action!](./src/assets/meetDEMO.gif)
 
 ## Objective
 To build a serverless, progressive web application (PWA) with React using a test-driven
