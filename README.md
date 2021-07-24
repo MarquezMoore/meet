@@ -9,7 +9,7 @@
 - [Objective](#Objective)
 - [Technologies](#Technologies)
 - [User-Stories](#User-Stories)
-- [Requirements](#Requirements)
+- [Technical-Specks](#Technical-Specks)
 
 ## Demo
 ![See in action!](./src/assets/meetDEMO.gif)
